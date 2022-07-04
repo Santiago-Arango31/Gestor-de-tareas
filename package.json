@@ -1,0 +1,17 @@
+{
+  "name": "seccion5_aplicaciondeconsola",
+  "version": "1.0.0",
+  "description": "Aplicacion de consola para la autogestion de tareas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Santiago Arango Valencia",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.4",
+    "uuid": "^8.3.2"
+  }
+}

@@ -23,26 +23,27 @@ class Tasks {
     }
 
     listAllTask() {
-        for (let i = 1; i < this._listado.length + 1; i++) {
-            console.log(` ${i.toString().green}. ${this._listado[i - 1].descripcion} :: ${this._listado[i - 1].completadoEn ? 'completado'.green : 'incompletado'.red} `)
-        }
+        this._listado.forEach((element, index) => {
+            console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? 'completado'.green : 'incompletado'.red} `)
+        });
+
     }
 
     listCompletePendingTask(pending) {
-        if (pending){
-            for (let i = 1; i < this._listado.length + 1; i++) {
-                if ( this._listado[i - 1].completadoEn == null  ) {
-                    console.log(` ${i.toString().green}. ${this._listado[i - 1].descripcion} :: ${this._listado[i - 1].completadoEn ? 'completado'.green : 'incompletado'.red} `)
+        if (pending) {
+            this._listado.forEach((element, index) => {
+                if (element.completadoEn == null) {
+                    console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? 'completado'.green : 'incompletado'.red} `)
                 }
-            }
+            })
         } else {
-            for (let i = 1; i < this._listado.length + 1; i++) {
-                if ( this._listado[i - 1].completadoEn != null  ) {
-                    console.log(` ${i.toString().green}. ${this._listado[i - 1].descripcion} :: ${this._listado[i - 1].completadoEn ? this._listado[i - 1].completadoEn.toString().green : 'incompletado'.red} `)
+            this._listado.forEach((element, index) => {
+                if (element.completadoEn != null) {
+                    console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? element.completadoEn.toString().green : 'incompletado'.red} `)
                 }
-            }
+            })
         }
-        
+
     }
 
     crearTarea(descripcion) {
@@ -50,9 +51,13 @@ class Tasks {
         this._listado[_tarea['id']] = _tarea
     }
 
-    deleteTareas(id = ""){
-        console.log('delete task')
-
+    deleteTareas(id) {
+        this._listado.forEach((element, index) => {
+            if (id == element.id) {
+                delete this._listado[index];
+                console.log(` ${'Task deleted'.blue} `)
+            }
+        });
     }
 }
 

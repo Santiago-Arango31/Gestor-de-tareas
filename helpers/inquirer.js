@@ -75,19 +75,34 @@ const inquirerDeleteAnyTask = async (task) => {
     const choices = task.map( (tarea,i) => {
         return {
             value: tarea.id,
-            name: `${(i + '.').green} ${tarea.descripcion}`
+            name: `${((i+1) + '.').green} ${tarea.descripcion}`
         }
     })
 
-    const preguntas = [{
+    choices.unshift({
+        value:'0',
+        name:`${'0.'.green} Cancel`
+    })
+
+    const question = [{
         type: 'list',
         name: 'id',
         message: ' Sure you want to delete? ',
         choices: choices
     }]
 
-    const {id} = await inquirer.prompt(preguntas)
+    const {id} = await inquirer.prompt(question)
     return id
 }
 
-module.exports = { inquirerMenu, inquirerDalay, inquirerInput, inquirerDeleteAnyTask  }
+const InquirerConfirm = async (message) => {
+    const question = [{
+        type:'confirm',
+        name:'ok',
+        message
+    }]
+    const {ok} = await inquirer.prompt(question)
+    return ok
+}
+
+module.exports = { inquirerMenu, inquirerDalay, inquirerInput, inquirerDeleteAnyTask, InquirerConfirm }

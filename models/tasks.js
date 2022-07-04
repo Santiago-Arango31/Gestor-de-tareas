@@ -24,7 +24,7 @@ class Tasks {
 
     listAllTask() {
         this._listado.forEach((element, index) => {
-            console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? 'completado'.green : 'incompletado'.red} `)
+            console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? 'completed'.green : 'unfinished'.red} `)
         });
 
     }
@@ -33,13 +33,13 @@ class Tasks {
         if (pending) {
             this._listado.forEach((element, index) => {
                 if (element.completadoEn == null) {
-                    console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? 'completado'.green : 'incompletado'.red} `)
+                    console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? 'completed'.green : 'unfinished'.red} `)
                 }
             })
         } else {
             this._listado.forEach((element, index) => {
                 if (element.completadoEn != null) {
-                    console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? element.completadoEn.toString().green : 'incompletado'.red} `)
+                    console.log(` ${index.toString().green}. ${element.descripcion} :: ${element.completadoEn ? new Date(element.completadoEn).green : 'incompletado'.red} `)
                 }
             })
         }
@@ -56,6 +56,18 @@ class Tasks {
             if (id == element.id) {
                 delete this._listado[index];
                 console.log(` ${'Task deleted'.blue} `)
+            }
+        });
+    }
+
+    updateTareas(arrayId = []) {
+        this._listado.forEach((element, index) => {
+            if (arrayId.includes(element.id)) {
+                if (!element.completadoEn) {
+                    element.completadoEn = new Date().toISOString()
+                }
+            } else {
+                element.completadoEn = null
             }
         });
     }

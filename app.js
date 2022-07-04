@@ -1,5 +1,5 @@
 require('colors')
-const { inquirerMenu, inquirerDalay, inquirerInput, inquirerDeleteAnyTask, InquirerConfirm } = require('./helpers/inquirer');
+const { inquirerMenu, inquirerDalay, inquirerInput, inquirerDeleteAnyTask, InquirerConfirm, inquirerSelectMultiTask } = require('./helpers/inquirer');
 const { saveData, readDataBase } = require('./helpers/savaData');
 const Task = require('./models/task');
 const Tasks = require('./models/tasks');
@@ -28,7 +28,10 @@ const main = async () => {
                 tareas.listCompletePendingTask(true)
                 break;
             case '5':
-
+                let selectedTasks = await inquirerSelectMultiTask(tareas.listadoArray)
+                if (selectedTasks != 0){
+                    tareas.updateTareas(selectedTasks)
+                }
                 break;
             case '6':
                 let auxId = await inquirerDeleteAnyTask(tareas.listadoArray)
